@@ -1,0 +1,64 @@
+﻿@model One_Stop_Solution.Models.Services
+
+<h4>Services</h4>
+<hr />
+<div class="row">
+    <div class="col-md-4">
+        <form asp-action="Create" enctype="multipart/form-data">
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+            @*<div class="form-group">
+                <label asp-for="CategoryId" class="control-label"></label>
+                <input asp-for="CategoryId" class="form-control" />
+                <span asp-validation-for="CategoryId" class="text-danger"></span>
+            </div>*@
+            <div class="form-group">
+                <label asp-for="Servicepic" class="control-label"></label>
+                <input type="file" asp-for="Servicepic" class="form-control" />
+                <span asp-validation-for="ServiceImage" class="text-danger"></span>
+            </div>
+
+            <div class="form-group">
+                <label asp-for="CategoryId" class="control-label">Category Name</label>
+                <select class="form-control" asp-for="CategoryId">
+                    @foreach (var item in ViewBag.catg)
+                    {
+                        <option value=@item.CategoryId>@item.CategoryName</option>
+                    }
+                </select>
+                <span asp-validation-for="CategoryId" class="text-danger"></span>
+            </div>
+
+
+
+
+
+
+
+
+
+            <div class="form-group">
+                <label asp-for="ServiceName" class="control-label"></label>
+                <input asp-for="ServiceName" class="form-control" />
+                <span asp-validation-for="ServiceName" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="ServiceDescription" class="control-label"></label>
+                <input asp-for="ServiceDescription" class="form-control" />
+                <span asp-validation-for="ServiceDescription" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="ServicePrice" class="control-label"></label>
+                <input asp-for="ServicePrice" class="form-control" />
+                <span asp-validation-for="ServicePrice" class="text-danger"></span>
+            </div> <br />
+            <div class="form-group">
+                <input type="submit" value="Create" class="btn btn-primary" /> &nbsp;&nbsp;  <a class="btn btn-primary" asp-action="ShowServices">Show All Services</a>
+            </div>
+        </form>
+    </div>
+</div>
+
+@*<div>
+    <a class="btn btn-primary" asp-action="ShowServices">Back to List</a>
+</div>*@
+

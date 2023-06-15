@@ -1,0 +1,69 @@
+﻿@model One_Stop_Solution.Models.Categories
+
+@{
+    ViewData["Title"] = "Home Page";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+<div>
+
+@*<style>
+    div.gallery {
+        
+    }
+
+      
+
+        div.gallery img {
+            width: 150;
+            height:150;
+            
+        }
+
+   /* div.desc {
+        padding: 15px;
+        text-align: center;
+    }*/
+</style>
+*@
+    
+
+    <div class="text-center" style="background-color:blueviolet">
+        <h1 class="display-4">Welcome To One Stop Solution</h1>
+        @* <p>Learn about <a href="https://docs.microsoft.com/aspnet/core">building Web apps with ASP.NET Core</a>.</p>*@
+    </div>
+    <style>
+        div.col-3:hover {
+            border: 10px solid #777;
+        }
+
+        div.col-3{
+            margin: 5px;
+            border: 10px solid #ccc;
+            float: left;
+            width: 180px;
+           
+        }
+    </style>
+        <div class="row">
+              
+                @foreach (var item in ViewBag.img)
+                {
+
+            <div class="col-3" style="float:left, "border:10px solid #ccc", >
+                <a asp-controller="Services" asp-action="ShowServices" asp-route-id="@item.CategoryId">
+                        <img height="150" width="150" src="data:image/jpeg;base64,@Convert.ToBase64String(item.Image)">
+                        @*<img height="50" width="50" src="data:image/jpeg;base64,@Convert.ToBase64String(item.Image)"/>*@
+                    </a>
+                        
+                </div>
+
+                }
+               
+            
+        </div>
+    
+    
+ 
+  
+  
+</div>

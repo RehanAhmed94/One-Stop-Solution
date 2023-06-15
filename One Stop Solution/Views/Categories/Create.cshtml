@@ -1,0 +1,38 @@
+﻿@model One_Stop_Solution.Models.Categories
+
+<h4>Categories</h4>
+<hr />
+<div class="row">
+    <div class="col-md-4">
+        <form asp-action="Create" enctype="multipart/form-data">
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+            <div class="form-group">
+                <label asp-for="CategoryName" class="control-label"></label>
+                <input asp-for="CategoryName" class="form-control" />
+                <span asp-validation-for="CategoryName" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Categorypic" class="control-label"></label>
+                <input type="file" asp-for="Categorypic" class="form-control" />
+                <span asp-validation-for="Image" class="text-danger"></span>
+            </div>
+            @*<div class="form-group">
+                <label asp-for="crea" class="control-label">Category Image</label>
+                <input type="file" asp-for="Categorypic" class="form-control" />
+                <span asp-validation-for="Image" class="text-danger"></span>
+            </div>*@ <br />
+            <div class="form-group">
+                <input type="submit" value="Create" class="btn btn-primary" /> &nbsp;&nbsp;  <a class="btn btn-primary" asp-action="ShowCategories">Show All Categories</a>
+            </div>
+        </form>
+    </div>
+</div>
+@*@foreach(var item in ViewBag.img)
+{
+    @Html.DisplayFor(imgitem => imgitem.);
+}*@
+
+@*<div>
+    <a class="btn btn-primary" asp-action="ShowCategories">Back to List</a>
+</div>*@
+

@@ -1,0 +1,117 @@
+﻿@model IEnumerable<One_Stop_Solution.Models.Services>
+
+@{
+    var sum = 0;
+}
+@using One_Stop_Solution.Models.VMs;
+
+<img style="margin-left:1000px" src="/Images/download.png" height="25" width="25" onclick="OpenCart()" />
+
+
+
+<p>
+    <a class="btn btn-primary" asp-action="Create">Create New</a>
+</p>
+<table class="table">
+    <thead>
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.CategoryId)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.ServiceName)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.ServiceDescription)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.ServicePrice)
+            </th>
+            <th>
+
+                @Html.DisplayNameFor(model => model.ServiceImage)
+            </th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+@foreach (var item in Model) {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.CategoryId)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.ServiceName)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.ServiceDescription)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.ServicePrice)
+            </td>
+                <td>
+
+                    <img height="50" width="50" src="data:image/jpeg;base64,@Convert.ToBase64String(item.ServiceImage)">
+                </td>
+                <td>
+                    <a class="btn btn-secondary" asp-action="AddToCart" asp-route-serviceId="@item.ServiceId">Add To Cart</a>
+                    @*<a asp-controller="Services" asp-action="Add" asp-route-id="@item.CategoryId">
+                        <button type="button" style="btn btn-primary">Add</button>
+                    </a>*@
+                    
+                </td>
+                @if (User.IsInRole("Admin"))
+                {
+                    <td>
+                        <ul style="list-style-type:none">
+                            <a class="btn btn-success" asp-action="Edit" asp-route-id="@item.ServiceId">Edit</a> |
+                            <a class="btn btn-primary" asp-action="Details" asp-route-id="@item.ServiceId">Details</a> |
+                            <a class="btn btn-danger" asp-action="Delete" asp-route-id="@item.ServiceId">Delete</a>
+                        </ul>
+                        @*<a class="btn btn-success" asp-action="Edit" asp-route-id="@item.ServiceId">Edit</a> |
+                <a class="btn btn-primary" asp-action="Details" asp-route-id="@item.ServiceId">Details</a> |
+                <a class="btn btn-danger" asp-action="Delete" asp-route-id="@item.ServiceId">Delete</a>*@
+                    </td>
+                }
+            
+        </tr>
+}
+    </tbody>
+</table>
+<div class="modal" id="modal1" tabindex="-1" role="dialog">
+    <div class="modal-dialog modal-lg modal-dialog-scrollable" role="document">
+        <div class="modal-content">
+
+            <div class="modal-body">
+                <p>Modal body text goes here.</p>
+            </div>
+
+        </div>
+    </div>
+</div>
+<script>
+    function OpenCart() {
+        $.ajax({
+            type: 'GET',
+            url: '/Services/ShowCart',
+            success: function (res) {
+                $('.modal-body').html(res),
+                    $('#modal1').modal('show')
+            }
+        });
+    }
+
+</script>
+<script>
+    function RemoveFromCart(orderid) {
+        $.ajax({
+            type: 'GET',
+            url: '/Services/DeleteCartItem?orderid='+orderid,
+            success: function (res) {
+                $('.modal-body').html(res),
+                    $('#modal1').modal('show')
+            }
+        });
+    }
+
+</script>

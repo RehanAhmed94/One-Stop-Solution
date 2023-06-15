@@ -1,0 +1,36 @@
+﻿@using Microsoft.AspNetCore.Identity;
+@model List<IdentityRole>
+
+    <div style="left:50; top:50;background-color:burlywood">
+        <h1>Add Role</h1>
+
+        <div class="form-group">
+            <form asp-action="CreateRole" method="post">
+                <div class="row">
+                <div class="col-3">
+                        <input  class="form-control" name="txtRole"></input>
+                    </div>
+                </div>
+                <div>
+                    <input type="submit" value="CreateRole"/>
+                </div>
+            </form>
+        </div>
+        <div ">
+            <h1>All Roles</h1>
+            <table class="table table-striped table-bordered">
+                <tr>
+                    <th>Role Id</th>
+                    <th>Role Name</th>
+                </tr>
+            @foreach(var Roles in Model)
+            {
+                <tr>
+                    <td>@Roles.Id</td>
+                    <td>@Roles.Name</td>
+
+                </tr>
+            }
+        </table>
+        </div>
+    </div>
